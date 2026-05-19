@@ -1,0 +1,83 @@
+diff --git a/src/bmp.c b/src/bmp.c
+index 3aa3b76..54373c2 100644
+--- a/src/bmp.c
++++ b/src/bmp.c
+@@ -1,3 +1,9 @@
++#include <stdio.h>
++#include <stdlib.h>
++// Source - https://stackoverflow.com/q/11129138
++// Posted by Sanich, modified by community. See post 'Timeline' for change history
++// Retrieved 2026-05-18, License - CC BY-SA 3.0
++
+ #pragma pack(push,1)
+ /* Windows 3.x bitmap file header */
+ typedef struct {
+@@ -25,8 +31,10 @@ typedef struct {
+ } bitmap_header;
+ #pragma pack(pop)
+ 
+-int foo(char* input, char *output) {
+-
++int main(int argc, char *argv[]) {
++    argv[1];
++    argv[2];
++    printf("input %s output %s\n",argv[1],argv[2]);
+     //variable dec:
+     FILE *fp,*out;
+     bitmap_header* hp;
+@@ -34,36 +42,41 @@ int foo(char* input, char *output) {
+     char *data;
+ 
+     //Open input file:
+-    fp = fopen(input, "r");
+-    if(fp==NULL){
++    fp = fopen(argv[1], "rb");
++    if(fp == NULL){
+         //cleanup
+     }
+ 
+ 
+     //Read the input file headers:
+     hp=(bitmap_header*)malloc(sizeof(bitmap_header));
+-    if(hp==NULL)
++    if(hp == NULL)
+         return 3;
+ 
+     n=fread(hp, sizeof(bitmap_header), 1, fp);
++    printf("n %d \n",n);
++    printf("sizeof(bitmap_header) %d \n",sizeof(bitmap_header));
++     
+     if(n<1){
+         //cleanup
+     }
+ 
+     //Read the data of the image:
+     data = (char*)malloc(sizeof(char)*hp->bitmapsize);
+-    if(data==NULL){
++    if(data == NULL){
+         //cleanup
+     }
+ 
+     fseek(fp,sizeof(char)*hp->fileheader.dataoffset,SEEK_SET);
+     n=fread(data,sizeof(char),hp->bitmapsize, fp);
+-    if(n<1){
++    printf("n hp->bitmapsize %d \n",n);
++    printf("width %d height %d \n", hp->width, hp->height);
++    printf("numcolors %d \n",hp->numcolors);
++    if(n<1){ 
+         //cleanup
+     }
+-
+         //Open output file:
+-    out = fopen(output, "w");
++    out = fopen(argv[2], "wb");
+     if(out==NULL){
+         //cleanup
+     }
+@@ -83,4 +96,4 @@ int foo(char* input, char *output) {
+     free(hp);
+     free(data);
+     return 0;
+-}
+\ No newline at end of file
++}
