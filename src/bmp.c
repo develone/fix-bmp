@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
     printf("number of data points %d \n",n);
     printf("before loop data 0x%x \n",data);
     for(loop=0;loop<8;loop++) {
-    	printf("loop %d data %x \n",loop,*data);
+    	printf("loop %d data %x data %d \n",loop,*data, *data);
 	data++;
     }
     printf("loop %d \n",loop);
