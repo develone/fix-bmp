@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
     //variable dec:
     FILE *fp,*out;
     bitmap_header* hp;
-    int n;
+    int n,loop;
     char *data;
 
     //Open input file:
@@ -63,15 +63,31 @@ int main(int argc, char *argv[]) {
 
     //Read the data of the image:
     data = (char*)malloc(sizeof(char)*hp->bitmapsize);
+    //data = (char*)malloc(sizeof(hp->bitmapsize);
+    printf("data %n \n",data);
     if(data == NULL){
         //cleanup
     }
 
     fseek(fp,sizeof(char)*hp->fileheader.dataoffset,SEEK_SET);
     n=fread(data,sizeof(char),hp->bitmapsize, fp);
-    printf("n hp->bitmapsize %d \n",n);
+    printf("number of data points %d \n",n);
+    for(loop=0;loop<8;loop++) {
+    	printf("loop %d data %x \n",loop,*data);
+	data++;
+    }
+    printf("1st value %d \n",*data);
+    printf("hp->bitmapsize %d \n",n);
     printf("width %d height %d \n", hp->width, hp->height);
-    printf("numcolors %d \n",hp->numcolors);
+    printf("hp->planes %d \n",hp->planes);
+    printf("hp->bitsperpixel %d \n",hp->bitsperpixel);
+    printf("hp->bitmapsize %d \n",hp->bitmapsize);
+    
+    
+    printf("hp->horizontalres %d \n",hp->horizontalres);
+    printf("hp->verticalres %d \n",hp->verticalres);
+    printf("hp->numcolors %d \n",hp->numcolors); 
+    printf("hp->mportantcolors %d \n",hp->importantcolors);
     if(n<1){ 
         //cleanup
     }
