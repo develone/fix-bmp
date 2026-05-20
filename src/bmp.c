@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     FILE *fp,*out;
     bitmap_header* hp;
     int n,loop;
-    char *data;
+    char *data,datasaved;
 
     //Open input file:
     fp = fopen(argv[1], "rb");
@@ -72,11 +72,17 @@ int main(int argc, char *argv[]) {
     fseek(fp,sizeof(char)*hp->fileheader.dataoffset,SEEK_SET);
     n=fread(data,sizeof(char),hp->bitmapsize, fp);
     printf("number of data points %d \n",n);
+    printf("before loop data 0x%x \n",data);
     for(loop=0;loop<8;loop++) {
     	printf("loop %d data %x \n",loop,*data);
 	data++;
     }
-    printf("1st value %d \n",*data);
+    printf("loop %d \n",loop);
+    printf("Restoring data subtracting the size of loop\n");
+    printf("after loop data 0x%x \n",data);
+    data = data - loop;
+    printf("restored data 0x%x \n",data);
+    //printf("1st value %d \n",*data);
     printf("hp->bitmapsize %d \n",n);
     printf("width %d height %d \n", hp->width, hp->height);
     printf("hp->planes %d \n",hp->planes);
