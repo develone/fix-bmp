@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
     printf("hp->horizontalres %d \n",hp->horizontalres);
     printf("hp->verticalres %d \n",hp->verticalres);
     printf("hp->numcolors %d \n",hp->numcolors); 
-    printf("hp->mportantcolors %d \n",hp->importantcolors);
+    printf("hp->importantcolors %d \n",hp->importantcolors);
     if(n<1){ 
         //cleanup
     }
