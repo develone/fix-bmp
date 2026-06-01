@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc src/bmp.c -o bmp
+gcc -g -Wall -Werror src/bmp.c -o bmp
