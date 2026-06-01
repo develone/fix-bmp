@@ -32,19 +32,19 @@ typedef struct {
 #pragma pack(pop)
 
 int main(int argc, char *argv[]) {
-    argv[1];
-    argv[2];
+    /*argv[1];
+    argv[2];*/
     printf("input %s output %s\n",argv[1],argv[2]);
     //variable dec:
     FILE *fp,*out;
     bitmap_header* hp;
     int n,loop;
-    char *data,datasaved;
-
+    //char *data,datasaved;
+		char *data;
     //Open input file:
     fp = fopen(argv[1], "rb");
     if(fp == NULL){
-        //cleanup
+         //cleanup
     }
 
 
@@ -55,16 +55,17 @@ int main(int argc, char *argv[]) {
 
     n=fread(hp, sizeof(bitmap_header), 1, fp);
     printf("n %d \n",n);
-    printf("sizeof(bitmap_header) %d \n",sizeof(bitmap_header));
+    printf("sizeof(bitmap_header) %ld \n",sizeof(bitmap_header));
      
     if(n<1){
         //cleanup
     }
 
     //Read the data of the image:
-    data = (char*)malloc(sizeof(char)*hp->bitmapsize);
+    printf("hp->bitmapsize %d \n", hp->bitmapsize);
+    data = (char*)malloc(hp->bitmapsize);
     //data = (char*)malloc(sizeof(hp->bitmapsize);
-    printf("data %n \n",data);
+    printf("data %s \n",data);
     if(data == NULL){
         //cleanup
     }
@@ -72,16 +73,16 @@ int main(int argc, char *argv[]) {
     fseek(fp,sizeof(char)*hp->fileheader.dataoffset,SEEK_SET);
     n=fread(data,sizeof(char),hp->bitmapsize, fp);
     printf("number of data points %d \n",n);
-    printf("before loop data 0x%x \n",data);
+    printf("before loop data %s \n",data);
     for(loop=0;loop<8;loop++) {
     	printf("loop %d data %x data %d \n",loop,*data, *data);
 	data++;
     }
     printf("loop %d \n",loop);
     printf("Restoring data subtracting the size of loop\n");
-    printf("after loop data 0x%x \n",data);
+    printf("after loop data %s \n",data);
     data = data - loop;
-    printf("restored data 0x%x \n",data);
+    printf("restored data %s \n",data);
     //printf("1st value %d \n",*data);
     printf("hp->bitmapsize %d \n",n);
     printf("width %d height %d \n", hp->width, hp->height);
