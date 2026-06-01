@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
     printf("hp->bitmapsize %d \n", hp->bitmapsize);
     data = (char*)malloc(hp->bitmapsize);
     //data = (char*)malloc(sizeof(hp->bitmapsize);
-    printf("data %s \n",data);
+    //printf("data %s \n",data);
     if(data == NULL){
         //cleanup
     }
@@ -73,16 +73,16 @@ int main(int argc, char *argv[]) {
     fseek(fp,sizeof(char)*hp->fileheader.dataoffset,SEEK_SET);
     n=fread(data,sizeof(char),hp->bitmapsize, fp);
     printf("number of data points %d \n",n);
-    printf("before loop data %s \n",data);
+    //printf("before loop data %s \n",data);
     for(loop=0;loop<8;loop++) {
     	printf("loop %d data %x data %d \n",loop,*data, *data);
 	data++;
     }
     printf("loop %d \n",loop);
     printf("Restoring data subtracting the size of loop\n");
-    printf("after loop data %s \n",data);
+    //printf("after loop data %s \n",data);
     data = data - loop;
-    printf("restored data %s \n",data);
+    //printf("restored data %s \n",data);
     //printf("1st value %d \n",*data);
     printf("hp->bitmapsize %d \n",n);
     printf("width %d height %d \n", hp->width, hp->height);
