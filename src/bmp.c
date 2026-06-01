@@ -54,6 +54,7 @@ int main(int argc, char *argv[]) {
         return 3;
 
     n=fread(hp, sizeof(bitmap_header), 1, fp);
+    printf("number of header points %d \n",n);
     printf("n %d \n",n);
     printf("sizeof(bitmap_header) %ld \n",sizeof(bitmap_header));
      
